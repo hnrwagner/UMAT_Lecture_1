@@ -8,7 +8,7 @@ C-------------------------------------------------------------------------------
 C Start of Base code, DO NOT change
 
 C---------------------------------------------------------------------------------------
-      SUBROUTINE UMAT_ISOTROP_3D(STRESS,STATEV,DDSDDE,SSE,SPD,SCD,
+      SUBROUTINE UMAT(STRESS,STATEV,DDSDDE,SSE,SPD,SCD,
      1 RPL,DDSDDT,DRPLDE,DRPLDT,
      2 STRAN,DSTRAN,TIME,DTIME,TEMP,DTEMP,PREDEF,DPRED,CMNAME,
      3 NDI,NSHR,NTENS,NSTATV,PROPS,NPROPS,COORDS,DROT,PNEWDT,
@@ -58,16 +58,18 @@ C           Number of direct stress components at this point.
 
 C           NSHR
 C           Number of engineering shear stress components at this point.
+
+
 		
-       DO K1=1, NDI
-       DO K2=1, NDI
-       DDSDDE(K2, K1)=(E*v)/((1+v)*(1-2*v))
-       END DO
-       DDSDDE(K1, K1)=(E*(1-v))/((1+v)*(1-2*v))
+       DO i=1, NDI
+           DO j=1, NDI
+               DDSDDE(j, i)=(E*v)/((1.D0+v)*(1.D0-2.D0*v))
+           END DO
+           DDSDDE(i, i)=(E*(1.D0-v))/((1.D0+v)*(1.D0-2.D0*v))
        END DO
        
-       DO K1=NDI+1, NTENS
-       DDSDDE(K1 ,K1)=G
+       DO i=NDI+1, NTENS
+           DDSDDE(i ,i)=G
        END DO
 
 C           Calculation of STRESSES 
@@ -79,9 +81,9 @@ C
 C           DSTRAN(NTENS)
 C           Array of strain increments.
 
-       DO K1=1, NTENS
-       DO K2=1, NTENS
-       STRESS(K2)=STRESS(K2)+DDSDDE(K2, K1)*DSTRAN(K1)
+       DO i=1, NTENS
+       DO j=1, NTENS
+           STRESS(j)=STRESS(j)+DDSDDE(j, i)*DSTRAN(i)
        END DO
        END DO
 
