@@ -71,7 +71,7 @@ C          Stiffness Matrix for Plane Stress
 		       			
 	     	   DDSDDE(1,1) = E/(ONE-v*v)
     		   DDSDDE(2,2) = E/(ONE-v*v)
-    	       DDSDDE(3,3) = E*(ONE-v)/(TWO*(ONE-v*v))
+    	           DDSDDE(3,3) = E*(ONE-v)/(TWO*(ONE-v*v))
     		   
     		   DDSDDE(1,2) = E*v/(ONE-v*v)
     		   DDSDDE(2,1) = E*v/(ONE-v*v)
