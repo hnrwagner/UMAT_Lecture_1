@@ -50,7 +50,7 @@ C           Lamé parameter 2 = Shear Modulus = myMu
          myNu=PROPS(2)
 
          myMu= myE / (TWO * (ONE + myNu)) 
-         myLambda= (myE * myNu) / ((ONE+myNu) * (ONE-TWO*myNu))
+         myLambda= (myE * myNu) / ((ONE + myNu) * (ONE - TWO * myNu))
          
 C           DDSDDE(NTENS,NTENS)
 C           Jacobian matrix of the constitutive model
@@ -64,7 +64,7 @@ C           Number of direct stress components at this point.
 C           NSHR
 C           Number of engineering shear stress components at this point.
 
-C          Stiffness Matrix for Isotropic Isothermal Elasticity with lamé parameters        
+C          Stiffness Matrix for Isotropic Isothermal Elasticity with Lamé parameters        
          
          DO i=1, NDI
              DO j=1, NDI
@@ -72,6 +72,7 @@ C          Stiffness Matrix for Isotropic Isothermal Elasticity with lamé param
              END DO
          DDSDDE(i, i)= TWO * myMu + myLambda
          END DO
+        
          DO i=NDI+1, NTENS
              DDSDDE(i ,i)= myMu
          END DO
@@ -87,7 +88,7 @@ C           Array of strain increments.
 
          DO i=1, NTENS
              DO j=1, NTENS
-                 STRESS(j)=STRESS(j)+DDSDDE(j, i)*DSTRAN(i)
+                 STRESS(j)=STRESS(j) + DDSDDE(j, i) * DSTRAN(i)
              END DO
          END DO
      
