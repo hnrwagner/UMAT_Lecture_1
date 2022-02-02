@@ -1,4 +1,4 @@
-C     ABAQUS Subroutine for Plasticity with Kinematic Hardening
+C     ABAQUS Subroutine for Plasticity with Kinematic Hardening and Element Deletion
 C     routine is written for linear hardening because the classical
 C			Prager-Ziegler theory is limited to this case
 C
@@ -68,10 +68,10 @@ C
 		 ENU=MIN(PROPS(2), ENUMAX)
 		 EBULK3=EMOD/(ONE-TWO*ENU)
 		 EG2=EMOD/(ONE+ENU)
-C Lamé parameter 2 - EG - Shear Modulus		  
+C LamÃ© parameter 2 - EG - Shear Modulus		  
 		 EG=EG2/TWO
 		 EG3=THREE*EG
-C Lamé parameter 1 - ELAM   		 
+C LamÃ© parameter 1 - ELAM   		 
 		 ELAM=(EBULK3-EG2)/THREE
 C
 C ELASTIC STIFFNESS
