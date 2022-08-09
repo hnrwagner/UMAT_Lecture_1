@@ -117,7 +117,7 @@ C           Stiffness Matrix for Isotropic Non-Isothermal Elasticity with Lamé 
                 DELDSE(K2,K1)=myLambda-myLambda_0
             END DO
             DDSDDE(K1,K1)=TWO * myMu + myLambda
-            DELDSE(K1,K1)=TWO * myMu + myLambda - TWO * myMu_0 + myLambda_0
+            DELDSE(K1,K1)=TWO * myMu + myLambda - TWO * myMu_0 - myLambda_0
         END DO
         DO K1=NDI+1,NTENS
             DDSDDE(K1,K1)=myMu
